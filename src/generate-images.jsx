@@ -9,10 +9,10 @@ const iconDir = rootDir + "assets/icons/";
 const outputPath = rootDir + "output/";
 
 function readCSVFile() {
-  let csvFile = new File(importPath);
+  var csvFile = new File(importPath);
   if (csvFile.exists) {
     csvFile.open("r");
-    let content = csvFile.read();
+    var content = csvFile.read();
     csvFile.close();
     return content;
   } else {
@@ -21,15 +21,15 @@ function readCSVFile() {
 }
 
 function parseCSV(data) {
-  let lines = data.split("\n");
-  let headers = lines[0].split(",");
-  let result = [];
-  for (let i = 1; i < lines.length; i++) {
+  var lines = data.split("\n");
+  var headers = lines[0].split(",");
+  var result = [];
+  for (var i = 1; i < lines.length; i++) {
     // Start at 1 to skip the header row
-    let cells = lines[i].split(",");
+    var cells = lines[i].split(",");
     if (cells.length === headers.length) {
-      let obj = {};
-      for (let j = 0; j < headers.length; j++) {
+      var obj = {};
+      for (var j = 0; j < headers.length; j++) {
         obj[headers[j]] = cells[j];
       }
       result.push(obj);
@@ -39,16 +39,16 @@ function parseCSV(data) {
 }
 
 function getFileNameFromURL(url) {
-  let parts = url.split("/");
-  let fileNameWithParams = parts[parts.length - 1];
+  var parts = url.split("/");
+  var fileNameWithParams = parts[parts.length - 1];
   return fileNameWithParams.split("?")[0];
 }
 
 function formatDate(dateStr) {
-  let dateParts = dateStr.split("-");
-  let year = dateParts[0];
-  let month = dateParts[1];
-  let monthNames = [
+  var dateParts = dateStr.split("-");
+  var year = dateParts[0];
+  var month = dateParts[1];
+  var monthNames = [
     "Jan",
     "Feb",
     "Mar",
@@ -62,19 +62,19 @@ function formatDate(dateStr) {
     "Nov",
     "Dec",
   ];
-  let monthName = monthNames[parseInt(month, 10) - 1];
+  var monthName = monthNames[parseInt(month, 10) - 1];
   return monthName + " " + year;
 }
 
 function setArtist(data) {
-  let layer = app.activeDocument.layers.getByName("Artist");
+  var layer = app.activeDocument.layers.getByName("Artist");
   if (layer) {
-    let textFrames = layer.textFrames;
-    for (let j = 0; j < textFrames.length; j++) {
+    var textFrames = layer.textFrames;
+    for (var j = 0; j < textFrames.length; j++) {
       if (data.artist) {
         textFrames[j].contents = data.artist;
         if (data.collector_number) {
-          textFrames[j].contents += " | " + data.collector_number;
+          textFrames[j].contents += " - CN " + data.collector_number;
         }
       } else {
         textFrames[j].contents = ""; // Clear if artist is not defined
@@ -86,14 +86,14 @@ function setArtist(data) {
 }
 
 function setIcon(imagePath) {
-  let layer = app.activeDocument.layers.getByName("Icon");
+  var layer = app.activeDocument.layers.getByName("Icon");
   if (layer) {
     // Remove existing content
     while (layer.pageItems.length > 0) {
       layer.pageItems[0].remove();
     }
     // Place new SVG using createFromFile
-    let placedItem = placeImage(layer, imagePath);
+    var placedItem = placeImage(layer, imagePath);
     if (placedItem) {
       // Match the position and dimensions of the rectangle in the Icon Wrapper layer
       matchRectangle(placedItem);
@@ -104,10 +104,10 @@ function setIcon(imagePath) {
 }
 
 function setSubtitle(text) {
-  const layer = app.activeDocument.layers.getByName("Subtitle");
+  var layer = app.activeDocument.layers.getByName("Subtitle");
   if (layer) {
-    let textFrames = layer.textFrames;
-    for (let i = 0; i < textFrames.length; i++) {
+    var textFrames = layer.textFrames;
+    for (var i = 0; i < textFrames.length; i++) {
       textFrames[i].contents = text;
     }
   } else {
@@ -116,10 +116,10 @@ function setSubtitle(text) {
 }
 
 function setTitle(text) {
-  const layer = app.activeDocument.layers.getByName("Title");
+  var layer = app.activeDocument.layers.getByName("Title");
   if (layer) {
-    let textFrames = layer.textFrames;
-    for (let i = 0; i < textFrames.length; i++) {
+    var textFrames = layer.textFrames;
+    for (var i = 0; i < textFrames.length; i++) {
       textFrames[i].contents = text;
     }
   } else {
@@ -127,24 +127,43 @@ function setTitle(text) {
   }
 }
 
-function updateContent(data) {
-  for (let i = 0; i < data.length; i++) {
-    if (i >= 5) break; // Process only the first 5 rows
+function setBackground(imagePath) {
+  var layer = app.activeDocument.layers.getByName("Background");
+  if (layer) {
+    // Remove existing content
+    while (layer.pageItems.length > 0) {
+      layer.pageItems[0].remove();
+    }
+    // Place new image using createFromFile
+    var placedItem = placeImage(layer, imagePath);
+    if (placedItem) {
+      // Fit the image to the width of the artboard and position it at the top
+      fitToArtboard(placedItem);
+    }
+  } else {
+    throw new Error("Background layer not found");
+  }
+}
 
-    let set = data[i];
-    let textContent = set.name;
+function updateContent(data) {
+  for (var i = 0; i < data.length; i++) {
+    if (i >= 2) break; // Process only the first 2 rows
+
+    var set = data[i];
+    var textContent = set.name;
 
     setTitle(textContent);
     setSubtitle(set.code.toUpperCase() + " - " + formatDate(set.released_at));
     setArtist(set);
     setIcon(iconDir + getFileNameFromURL(set.icon_svg_uri));
+    setBackground(backgroundDir + set.background); // Assume background field contains the file name
 
     exportPNG(textContent);
   }
 }
 
 function placeImage(layer, filePath) {
-  let file = new File(filePath);
+  var file = new File(filePath);
   if (file.exists) {
     try {
       return layer.groupItems.createFromFile(file);
@@ -157,31 +176,31 @@ function placeImage(layer, filePath) {
 }
 
 function matchRectangle(placedItem) {
-  let iconWrapperLayer = app.activeDocument.layers.getByName("Icon Wrapper");
+  var iconWrapperLayer = app.activeDocument.layers.getByName("Icon Wrapper");
   if (iconWrapperLayer) {
-    let rectangles = iconWrapperLayer.pathItems;
-    for (let i = 0; i < rectangles.length; i++) {
+    var rectangles = iconWrapperLayer.pathItems;
+    for (var i = 0; i < rectangles.length; i++) {
       if (rectangles[i].typename === "PathItem" && rectangles[i].closed) {
-        let rectangle = rectangles[i];
-        let rectWidth = rectangle.width;
-        let rectHeight = rectangle.height;
-        let rectPosition = rectangle.position;
+        var rectangle = rectangles[i];
+        var rectWidth = rectangle.width;
+        var rectHeight = rectangle.height;
+        var rectPosition = rectangle.position;
 
         // Resize the placed item to match the rectangle height
-        let scaleFactor = (rectHeight / placedItem.height) * 100;
+        var scaleFactor = (rectHeight / placedItem.height) * 100;
         placedItem.resize(scaleFactor, scaleFactor);
 
         // Move the placed item to center it within the rectangle
-        let newWidth = placedItem.width;
-        let newHeight = placedItem.height;
+        var newWidth = placedItem.width;
+        var newHeight = placedItem.height;
 
-        let newPositionX = rectPosition[0] + (rectWidth - newWidth) / 2;
-        let newPositionY = rectPosition[1] - (rectHeight - newHeight) / 2;
+        var newPositionX = rectPosition[0] + (rectWidth - newWidth) / 2;
+        var newPositionY = rectPosition[1] - (rectHeight - newHeight) / 2;
 
         placedItem.position = [newPositionX, newPositionY];
 
         // Align the right edge of placedItem with the right edge of the rectangle
-        let rightEdgeX = rectPosition[0] + rectWidth;
+        var rightEdgeX = rectPosition[0] + rectWidth;
         placedItem.position = [rightEdgeX - newWidth, newPositionY];
 
         break;
@@ -192,14 +211,34 @@ function matchRectangle(placedItem) {
   }
 }
 
+function fitToArtboard(item) {
+  var artboard = app.activeDocument.artboards[0];
+  var artboardRect = artboard.artboardRect;
+  var artboardWidth = artboardRect[2] - artboardRect[0];
+
+  var itemWidth = item.width;
+
+  // Calculate the scale factor to fit the width of the artboard
+  var scaleX = artboardWidth / itemWidth;
+
+  // Scale the item uniformly
+  item.resize(scaleX * 100, scaleX * 100);
+
+  // Move the item to the top of the artboard
+  var offsetX = artboardRect[0] - item.left;
+  var offsetY = artboardRect[1] - item.top;
+
+  item.translate(offsetX, offsetY);
+}
+
 function exportPNG(textContent) {
-  let fileName = textContent
+  var fileName = textContent
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
-  let exportFile = new File(outputPath + fileName + ".png");
+  var exportFile = new File(outputPath + fileName + ".png");
 
-  let exportOptions = new ExportOptionsPNG24();
+  var exportOptions = new ExportOptionsPNG24();
   exportOptions.artBoardClipping = true;
   exportOptions.verticalScale = 1000; // Higher scale for better resolution
   exportOptions.horizontalScale = 1000; // Higher scale for better resolution
@@ -216,12 +255,12 @@ function exportPNG(textContent) {
 
 // Main script execution
 try {
-  let csvData = readCSVFile();
+  var csvData = readCSVFile();
   if (csvData) {
-    let layersData = parseCSV(csvData);
+    var layersData = parseCSV(csvData);
     updateContent(layersData);
   } else {
-    throw new Error("No CSV file found or unable to read the file.");
+    alert("No CSV file found or unable to read the file.");
   }
 } catch (e) {
   alert("Script halted due to error: " + e.message);
