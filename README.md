@@ -9,6 +9,12 @@ This tool was designed to create dividers based on MTG sets, but it could be use
 
 The background arts are vertical to help fill out as much of the vertical space of a 100mm tall card as possible.  However, there's still a significant amount of unused space black space at the bottom of each rendered divider.  However, given that only the top portion of the divider will be visible at most times, this shouldn't be a significant issue.
 
+## Download existing dividers
+
+You can freely download individual dividers from the `output` directory.  Each divider is named with the set code and set name.
+
+Alternatively, you can download the entire set of dividers from the [releases page](https://github.com/GabeStah/mtg-divider/releases/tag/v1.0.0) by unzipping the Source code (zip) file.
+
 ## Usage
 
 ### Prerequisites
