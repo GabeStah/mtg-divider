@@ -7,7 +7,8 @@ This tool was designed to create dividers based on MTG sets, but it could be use
 
 ## Caveats
 
-The background arts are vertical to help fill out as much of the vertical space of a 100mm tall card as possible.  However, there's still a significant amount of unused space black space at the bottom of each rendered divider.  However, given that only the top portion of the divider will be visible at most times, this shouldn't be a significant issue.
+- The background arts are vertical to help fill out as much of the vertical space of a 100mm tall card as possible.  However, there's still a significant amount of unused space black space at the bottom of each rendered divider.  However, given that only the top portion of the divider will be visible at most times, this shouldn't be a significant issue.
+- You may need to relink some frame files in the Adobe Illustrator template.  If so, you can find them in the `assets/frames` directory.
 
 ## Download existing dividers
 
@@ -20,6 +21,7 @@ Alternatively, you can download the entire set of dividers from the [releases pa
 ### Prerequisites
 
 - Adobe Illustrator: To generate cards from the data in `data/sets.csv`. Tested on Illustrator 2024, but should work with older versions.
+- Install the Beleren fonts, which are the default fonts used in Magic card titles.  Download both the `Beleren2016-Bold` and `Beleren2016SmallCaps-Bold` fonts from here and double-click to install the appropriate version for your file system: https://github.com/Saeris/typeface-beleren-bold/tree/master
 - *(Optional)* [NodeJS](https://nodejs.org/en) installed on your machine.  Only required if you want to automatically update the set data.  You can also manually update the `data/sets.csv` file.
 
 ### Image generation
