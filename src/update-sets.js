@@ -8,17 +8,14 @@ function readBackgroundsAndAppendData(setData) {
   const files = fs.readdirSync(backgroundsDirectory);
 
   setData.forEach((set) => {
-    // Attempt to find a background that matches the set code.
     const regex = new RegExp(`\\[${set.code.toUpperCase()}\\]`);
     let file = files.find((f) => regex.test(f));
 
-    // If no matching file is found, pick a random background.
     if (!file) {
       const randomIndex = Math.floor(Math.random() * files.length);
       file = files[randomIndex];
     }
 
-    // Extract details from the chosen background file name.
     const match = file.match(/^(.*?) \((.*?)\) \[(.*?)\] \{(.*?)\}\.jpg$/);
     if (match) {
       set.card_name = match[1];
@@ -26,7 +23,6 @@ function readBackgroundsAndAppendData(setData) {
       set.collector_number = match[4];
     }
 
-    // Append the background file name to the set object
     set.background = file;
   });
 }
@@ -37,29 +33,24 @@ function saveDataToCSV(data, filePath) {
     return;
   }
 
-  // Create a set to track all unique keys
   const allKeys = new Set();
 
-  // Add every key found in each data object to the set of all keys
   data.forEach((item) => {
     Object.keys(item).forEach((key) => {
       allKeys.add(key);
     });
   });
 
-  // Create headers for CSV from all unique keys
   const headers = Array.from(allKeys).map((key) => ({
     id: key,
     title: key,
   }));
 
-  // Initialize the CSV writer with dynamically determined headers
   const csvWriter = createCsvWriter({
     path: filePath,
     header: headers,
   });
 
-  // Write the data to the CSV file
   csvWriter
     .writeRecords(data)
     .then(() => {
@@ -73,7 +64,6 @@ function saveDataToCSV(data, filePath) {
 async function downloadIconIfNeeded(codeToIconMap) {
   const iconDirectory = path.join(__dirname, "../assets/icons/");
 
-  // Ensure the directory exists
   fs.mkdirSync(iconDirectory, { recursive: true });
 
   let downloadCount = 0;
@@ -91,7 +81,6 @@ async function downloadIconIfNeeded(codeToIconMap) {
 
         response.data.pipe(fs.createWriteStream(iconPath));
 
-        // Wait for the download to finish
         await new Promise((resolve, reject) => {
           response.data.on("end", resolve);
           response.data.on("error", reject);
@@ -166,16 +155,12 @@ class SetFetcher {
   }
 }
 
-// Usage
-// Usage
-const fetcher = new SetFetcher(); // Specify set codes here
+const fetcher = new SetFetcher();
 fetcher.getSetData().then((data) => {
   readBackgroundsAndAppendData(data);
 
-  // console.log("Final data before saving to CSV:", data[0]);
-
   const csvPath = path.join(__dirname, "../data/sets.csv");
-  saveDataToCSV(data, csvPath); // Save the data to CSV
+  saveDataToCSV(data, csvPath);
 
   const codeToIconMap = createCodeToIconMap(data);
   downloadIconIfNeeded(codeToIconMap).then(() => {

@@ -1,7 +1,8 @@
 {
-  "name": "divider-maker",
+  "name": "mtg-divisor",
   "version": "1.0.0",
-  "description": "",
+  "description": "Create Magic: The Gathering card dividers from a CSV file.",
+  "author": "Gabe Wyatt <gabe@gabewyatt.com>",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
