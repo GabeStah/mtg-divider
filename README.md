@@ -21,11 +21,10 @@ Alternatively, you can download the entire set of dividers from the [releases pa
 ### Prerequisites
 
 - Adobe Illustrator: To generate cards from the data in `data/sets.csv`. Tested on Illustrator 2024, but should work with older versions.
-- Install the Beleren fonts, which are the default fonts used in Magic card titles.  Download both the `Beleren2016-Bold` and `Beleren2016SmallCaps-Bold` fonts from here and double-click to install the appropriate version for your file system: https://github.com/Saeris/typeface-beleren-bold/tree/master
+- Install the Beleren fonts, which are the default fonts used in Magic card titles.  Download both Beleren fonts from here and double-click to install them: https://github.com/Investigamer/Proxyshop/tree/main/fonts
 - *(Optional)* [NodeJS](https://nodejs.org/en) installed on your machine.  Only required if you want to automatically update the set data.  You can also manually update the `data/sets.csv` file.
 
 ### Image generation
-
 1. Open the `scripted-trump-size-card.ai` file in Adobe Illustrator.
 2. In the **Layers** panel, select the *Icon* or *Background* layer.  This helps prevent accidental errors due to layer locks when running the script.
 3. Navigate to **File > Scripts > Other Script...** and select the `src/generate-images.jsx` file.
