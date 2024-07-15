@@ -37,16 +37,29 @@ function saveDataToCSV(data, filePath) {
     return;
   }
 
-  const headers = Object.keys(data[0]).map((key) => ({
+  // Create a set to track all unique keys
+  const allKeys = new Set();
+
+  // Add every key found in each data object to the set of all keys
+  data.forEach((item) => {
+    Object.keys(item).forEach((key) => {
+      allKeys.add(key);
+    });
+  });
+
+  // Create headers for CSV from all unique keys
+  const headers = Array.from(allKeys).map((key) => ({
     id: key,
     title: key,
   }));
 
+  // Initialize the CSV writer with dynamically determined headers
   const csvWriter = createCsvWriter({
     path: filePath,
     header: headers,
   });
 
+  // Write the data to the CSV file
   csvWriter
     .writeRecords(data)
     .then(() => {
