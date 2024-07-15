@@ -33,7 +33,9 @@ The script will automatically generate a card for each row in the `data/sets.csv
 
 ### Set data collection
 
-The `data/sets.csv` file contains the set data used to generate the dividers.  By default, it contains all sets from these base types:
+The `data/sets.csv` file contains the set data used to generate the dividers.
+
+By default, it contains all sets from these base types:
 
 - `core`
 - `expansion`
@@ -68,6 +70,14 @@ node src/update-sets.js
 ```
 
 This script automatically fetches the latest set data from Scryfall and updates the `data/sets.csv` file.  It will also attempt to automatically assigned appropriate background art to each set based on the set code.  See [Background art](#background-art) for more information.
+
+#### Retrieving specific set data
+
+If you want to retrieve data for specific sets you can add the set code(s) as arguments to the script, e.g.:
+
+```bash
+py src/update-sets.js exampleSetCode1 exampleSetCode2 exampleSetCode3
+```
 
 ### Background art
 

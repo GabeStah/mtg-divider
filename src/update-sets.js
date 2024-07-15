@@ -3,6 +3,10 @@ const path = require("path");
 const axios = require("axios");
 const createCsvWriter = require("csv-writer").createObjectCsvWriter;
 
+function processArgs() {
+  return process.argv.slice(2);
+}
+
 function readBackgroundsAndAppendData(setData) {
   const backgroundsDirectory = path.join(__dirname, "../assets/backgrounds/");
   const files = fs.readdirSync(backgroundsDirectory);
@@ -126,28 +130,31 @@ class SetFetcher {
       const response = await axios.get(this.apiEndpoint);
       const data = response.data.data || [];
 
-      const knownSets = new Set(data.map((set) => set.code));
-      const specifiedSets = new Set(
-        this.setCodes.map((code) => code.toLowerCase()),
-      );
-      const unknownSets = new Set(
-        [...specifiedSets].filter((x) => !knownSets.has(x)),
-      );
+      if (this.setCodes.length > 0) {
+        const specifiedSets = new Set(
+          this.setCodes.map((code) => code.toLowerCase()),
+        );
+        const unknownSets = new Set(
+          [...specifiedSets].filter(
+            (code) => !data.some((set) => set.code.toLowerCase() === code),
+          ),
+        );
 
-      if (unknownSets.size > 0) {
-        console.log(`Unknown sets: ${Array.from(unknownSets).join(", ")}`);
+        if (unknownSets.size > 0) {
+          console.log(`Unknown sets: ${Array.from(unknownSets).join(", ")}`);
+        }
+
+        return data.filter((exp) => specifiedSets.has(exp.code.toLowerCase()));
+      } else {
+        return data.filter(
+          (exp) =>
+            !this.ignoredSets.has(exp.code) &&
+            exp.card_count >= this.minimumSetSize &&
+            (this.setTypes.size === 0 || this.setTypes.has(exp.set_type)) &&
+            !exp.digital &&
+            (!exp.nonfoil_only || !exp.foil_only),
+        );
       }
-
-      return data.filter(
-        (exp) =>
-          !this.ignoredSets.has(exp.code) &&
-          exp.card_count >= this.minimumSetSize &&
-          (this.setTypes.size === 0 || this.setTypes.has(exp.set_type)) &&
-          (this.setCodes.length === 0 ||
-            specifiedSets.has(exp.code.toLowerCase())) &&
-          !exp.digital && // Assuming we want to ignore purely digital sets
-          (!exp.nonfoil_only || !exp.foil_only), // Additional conditions based on foil preferences
-      );
     } catch (error) {
       console.log(`Error occurred while fetching set data: ${error.message}`);
       return [];
@@ -155,7 +162,8 @@ class SetFetcher {
   }
 }
 
-const fetcher = new SetFetcher();
+const setCodes = processArgs();
+const fetcher = new SetFetcher(setCodes);
 fetcher.getSetData().then((data) => {
   readBackgroundsAndAppendData(data);
 
