@@ -25,6 +25,7 @@ Alternatively, you can download the entire set of dividers from the [releases pa
 - *(Optional)* [NodeJS](https://nodejs.org/en) installed on your machine.  Only required if you want to automatically update the set data.  You can also manually update the `data/sets.csv` file.
 
 ### Image generation
+
 1. Open the `scripted-trump-size-card.ai` file in Adobe Illustrator.
 2. In the **Layers** panel, select the *Icon* or *Background* layer.  This helps prevent accidental errors due to layer locks when running the script.
 3. Navigate to **File > Scripts > Other Script...** and select the `src/generate-images.jsx` file.
@@ -63,7 +64,13 @@ this.ignoredSets = new Set(["exampleSetCode1", "exampleSetCode2"]);
 
 #### Automatically updating set data
 
-To update the set data, run the following command from a local terminal:
+To update the set data, install the prerequisite libraries:
+
+```bash
+pnpm install
+```
+
+Then run the following command from a local terminal:
 
 ```bash
 node src/update-sets.js
