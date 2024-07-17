@@ -82,6 +82,7 @@ This script automatically fetches the latest set data from Scryfall and updates 
 
 #### Optional arguments
 
+- `--random-art`: Randomly assigns background art to each set.  Default is `false`.
 - `--sort-by`: Sorts the sets by the given property.  Possible values are any property [returned by the Scryfall API](https://scryfall.com/docs/api/sets).  Default is `code`.
 - `--sort-dir`: Sorts the sets in ascending or descending order.  Possible values are `asc` or `desc`.  Default is `asc`.
 

@@ -10,7 +10,7 @@ const outputPath = rootDir + "output/";
 function readCSVFile() {
   var csvFile = new File(importPath);
   if (csvFile.exists) {
-    csvFile.encoding = "UTF-8"; // Ensure correct encoding
+    csvFile.encoding = "UTF-8";
     csvFile.open("r");
     var content = csvFile.read();
     csvFile.close();
@@ -148,8 +148,21 @@ function setSubtitle(data) {
 }
 
 function setTitle(text) {
-  if (text.slice(-9) === "Commander") {
-    text = text.slice(0, -9) + "(C)";
+  var MAX_LENGTH = 30;
+  if (text.length >= MAX_LENGTH) {
+    var replacements = {
+      Commander: "(C)",
+      "Duel Decks Anthology": "DDA",
+      "Duel Decks": "DD",
+    };
+
+    for (var key in replacements) {
+      text = text.split(key).join(replacements[key]);
+    }
+
+    if (text.length >= MAX_LENGTH) {
+      text = text.slice(0, 29) + "...";
+    }
   }
 
   var layer = app.activeDocument.layers.getByName("Title");
@@ -181,8 +194,6 @@ function setBackground(imagePath) {
 function updateContent(data) {
   var imagesGenerated = 0;
   for (var i = 0; i < data.length; i++) {
-    // if (i >= 31) break; // Process only the first 5 rows
-
     var set = data[i];
     var textContent = set.name;
 
@@ -190,7 +201,7 @@ function updateContent(data) {
     setSubtitle(set);
     setArtist(set);
     setIcon(iconDir + getFileNameFromURL(set.icon_svg_uri));
-    setBackground(backgroundDir + set.background); // Assume background field contains the file name
+    setBackground(backgroundDir + set.background);
 
     exportPNG(set.code, textContent);
     imagesGenerated++;
@@ -228,7 +239,6 @@ function matchRectangle(placedItem) {
     var rectHeight = rectangle.height;
     var rectPosition = rectangle.position;
 
-    // If placedItem has zero height or width, return early
     if (placedItem.height === 0 || placedItem.width === 0) {
       return;
     }

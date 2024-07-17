@@ -9,6 +9,7 @@ function processArgs() {
     setCodes: [],
     sortBy: "code",
     sortDir: "asc",
+    randomArt: false,
   };
 
   for (let i = 0; i < argv.length; i++) {
@@ -26,6 +27,8 @@ function processArgs() {
     ) {
       args.sortDir = argv[i + 1];
       i++;
+    } else if (argv[i] === "--random-art") {
+      args.randomArt = true;
     } else if (!argv[i].startsWith("--")) {
       args.setCodes.push(argv[i]);
     }
@@ -34,7 +37,6 @@ function processArgs() {
   return args;
 }
 
-// Sort the data before saving to CSV
 function sortData(data, sortBy, sortOrder) {
   return data.sort((a, b) => {
     let valA = a[sortBy],
@@ -47,17 +49,20 @@ function sortData(data, sortBy, sortOrder) {
   });
 }
 
-function readBackgroundsAndAppendData(setData) {
+function readBackgroundsAndAppendData(setData, randomArt) {
   const backgroundsDirectory = path.join(__dirname, "../assets/backgrounds/");
   const files = fs.readdirSync(backgroundsDirectory);
 
   setData.forEach((set) => {
-    const regex = new RegExp(`\\[${set.code.toUpperCase()}\\]`);
-    let file = files.find((f) => regex.test(f));
-
-    if (!file) {
+    let file;
+    if (randomArt) {
       const randomIndex = Math.floor(Math.random() * files.length);
       file = files[randomIndex];
+    } else {
+      const regex = new RegExp(`\\[${set.code.toUpperCase()}\\]`);
+      file =
+        files.find((f) => regex.test(f)) ||
+        files[Math.floor(Math.random() * files.length)];
     }
 
     const match = file.match(/^(.*?) \((.*?)\) \[(.*?)\] \{(.*?)\}\.jpg$/);
@@ -214,7 +219,7 @@ class SetFetcher {
 const args = processArgs();
 const fetcher = new SetFetcher(args.setCodes);
 fetcher.getSetData().then((data) => {
-  readBackgroundsAndAppendData(data);
+  readBackgroundsAndAppendData(data, args.randomArt);
   data = sortData(data, args.sortBy, args.sortDir); // Sort data before saving to CSV
 
   const csvPath = path.join(__dirname, "../data/sets.csv");
