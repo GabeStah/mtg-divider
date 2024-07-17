@@ -4,7 +4,47 @@ const axios = require("axios");
 const createCsvWriter = require("csv-writer").createObjectCsvWriter;
 
 function processArgs() {
-  return process.argv.slice(2);
+  const argv = process.argv.slice(2);
+  let args = {
+    setCodes: [],
+    sortBy: "code",
+    sortDir: "asc",
+  };
+
+  for (let i = 0; i < argv.length; i++) {
+    if (
+      argv[i] === "--sort-by" &&
+      argv[i + 1] &&
+      !argv[i + 1].startsWith("--")
+    ) {
+      args.sortBy = argv[i + 1];
+      i++;
+    } else if (
+      argv[i] === "--sort-dir" &&
+      argv[i + 1] &&
+      !argv[i + 1].startsWith("--")
+    ) {
+      args.sortDir = argv[i + 1];
+      i++;
+    } else if (!argv[i].startsWith("--")) {
+      args.setCodes.push(argv[i]);
+    }
+  }
+
+  return args;
+}
+
+// Sort the data before saving to CSV
+function sortData(data, sortBy, sortOrder) {
+  return data.sort((a, b) => {
+    let valA = a[sortBy],
+      valB = b[sortBy];
+    if (sortOrder === "asc") {
+      return valA < valB ? -1 : valA > valB ? 1 : 0;
+    } else {
+      return valA < valB ? 1 : valA > valB ? -1 : 0;
+    }
+  });
 }
 
 function readBackgroundsAndAppendData(setData) {
@@ -114,12 +154,21 @@ class SetFetcher {
     this.setCodes = setCodes;
     this.apiEndpoint = "https://api.scryfall.com/sets";
     this.ignoredSets = new Set(["exampleSetCode1", "exampleSetCode2"]); // Update as needed
-    this.minimumSetSize = 5; // Update as needed
+    this.minimumSetSize = 50; // Update as needed
     this.setTypes = new Set([
       "core",
       "expansion",
+      "starter", // Portal, P3k, welcome decks
+      "masters",
       "commander",
-      "draft_innovation",
+      "planechase",
+      "draft_innovation", // Battlebond, Conspiracy
+      "duel_deck", // Duel Deck Elves,
+      "premium_deck", // Premium Deck Series: Slivers, Premium Deck Series: Graveborn
+      "from_the_vault", // Make sure to adjust the MINIMUM_SET_SIZE if you want these
+      "archenemy",
+      "box",
+      "funny", // Unglued, Unhinged, Ponies: TG, etc.
     ]);
   }
 
@@ -162,10 +211,11 @@ class SetFetcher {
   }
 }
 
-const setCodes = processArgs();
-const fetcher = new SetFetcher(setCodes);
+const args = processArgs();
+const fetcher = new SetFetcher(args.setCodes);
 fetcher.getSetData().then((data) => {
   readBackgroundsAndAppendData(data);
+  data = sortData(data, args.sortBy, args.sortDir); // Sort data before saving to CSV
 
   const csvPath = path.join(__dirname, "../data/sets.csv");
   saveDataToCSV(data, csvPath);

@@ -36,21 +36,23 @@ The script will automatically generate a card for each row in the `data/sets.csv
 
 The `data/sets.csv` file contains the set data used to generate the dividers.
 
-By default, it contains all sets from these base types:
-
-- `core`
-- `expansion`
-- `commander`
-- `draft_innovation`
-
 This can be adjusted by modifying the `SetFinder.setTypes` property in the `src/update-sets.js` file.
 
 ```javascript
 this.setTypes = new Set([
   "core",
   "expansion",
+  "starter", // Portal, P3k, welcome decks
+  "masters",
   "commander",
-  "draft_innovation",
+  "planechase",
+  "draft_innovation", // Battlebond, Conspiracy
+  "duel_deck", // Duel Deck Elves,
+  "premium_deck", // Premium Deck Series: Slivers, Premium Deck Series: Graveborn
+  "from_the_vault",
+  "archenemy",
+  "box",
+  "funny", // Unglued, Unhinged, Ponies: TG, etc.
 ]);
 ```
 
@@ -78,12 +80,23 @@ node src/update-sets.js
 
 This script automatically fetches the latest set data from Scryfall and updates the `data/sets.csv` file.  It will also attempt to automatically assigned appropriate background art to each set based on the set code.  See [Background art](#background-art) for more information.
 
+#### Optional arguments
+
+- `--sort-by`: Sorts the sets by the given property.  Possible values are any property [returned by the Scryfall API](https://scryfall.com/docs/api/sets).  Default is `code`.
+- `--sort-dir`: Sorts the sets in ascending or descending order.  Possible values are `asc` or `desc`.  Default is `asc`.
+
 #### Retrieving specific set data
 
 If you want to retrieve data for specific sets you can add the set code(s) as arguments to the script, e.g.:
 
 ```bash
-py src/update-sets.js exampleSetCode1 exampleSetCode2 exampleSetCode3
+node src/update-sets.js exampleSetCode1 exampleSetCode2 exampleSetCode3
+```
+
+If you're using with optional arguments, add the additional args after the set codes, e.g.:
+
+```bash
+node src/update-sets.js exampleSetCode1 exampleSetCode2 exampleSetCode3 --sort-by released_at --sort-dir desc
 ```
 
 ### Background art
