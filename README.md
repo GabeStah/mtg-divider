@@ -1,6 +1,6 @@
 MTG Divider is a tool to help generate collection dividers for Magic: The Gathering cards. The generated dividers are exported at 62mm x 100mm (the standard size of a [Trump game card](https://en.wikipedia.org/wiki/Trump_(card_games))) and are configured to be printed at makeplayingcards.com using their [Trump card template](https://www.makeplayingcards.com/design/custom-trump-cards.html).  These dividers will fit in a vertical [Arkhive Xenoskin by Ultimate Guard](https://ultimateguard.com/en/Boxes/Arkhive-Xenoskin/UGD011256/), [BCW card bins](https://www.bcwsupplies.com/trading-card/trading-card-boxes), or most other larger vertical collection boxes.
 
-![printed-example.mp4](assets/video/printed-example.mp4)
+https://github.com/user-attachments/assets/cd440b85-264e-49d1-8902-ac764154b34f
 
 This tool was designed to create dividers based on MTG sets, but it could be used to create other types of dividers with some tweaking.  It has two primary components:
 
