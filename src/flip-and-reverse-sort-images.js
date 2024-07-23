@@ -8,6 +8,19 @@ const outputDir = path.join(__dirname, "../output-reversed");
 // Ensure the output directory exists
 if (!fs.existsSync(outputDir)) {
   fs.mkdirSync(outputDir, { recursive: true });
+} else {
+  // Clear out existing files in the output directory
+  fs.readdir(outputDir, (err, files) => {
+    if (err) {
+      console.error("Error reading the output directory for cleanup:", err);
+      return;
+    }
+    files.forEach((file) => {
+      fs.unlink(path.join(outputDir, file), (err) => {
+        if (err) console.error(`Error deleting file ${file}:`, err);
+      });
+    });
+  });
 }
 
 // Read files from the input directory

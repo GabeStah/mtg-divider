@@ -1,0 +1,161 @@
+<order>
+    <details>
+        <quantity>25</quantity>
+        <bracket>36</bracket>
+        <stock>(S30) Standard Smooth</stock>
+        <foil>false</foil>
+    </details>
+    <fronts>
+        <card>
+            <id>1hpKxDN7jgliJqiu36IFLPN3mYnSRTgX2</id>
+            <slots>0</slots>
+            <name>Path to Exile.png</name>
+            <query>path to exile</query>
+        </card>
+        <card>
+            <id>14XwxIkoNd9YPZYWTmZHYhPNvScItXLGF</id>
+            <slots>1</slots>
+            <name>Phyrexian Metamorph.png</name>
+            <query>phyrexian metamorph</query>
+        </card>
+        <card>
+            <id>1sM3ITq55OIAyFqpllydA_wPXx407eJ29</id>
+            <slots>2</slots>
+            <name>Swords to Plowshares.png</name>
+            <query>swords to plowshares</query>
+        </card>
+        <card>
+            <id>1fk0O-EC0NbHVWWhcxeBvXmpIo7bgy4RT</id>
+            <slots>3</slots>
+            <name>Whir of Invention.png</name>
+            <query>whir of invention</query>
+        </card>
+        <card>
+            <id>1ednGyIXILSBK6fxFjXQ2JhJ8RsEPpyOO</id>
+            <slots>4</slots>
+            <name>Fellwar Stone.png</name>
+            <query>fellwar stone</query>
+        </card>
+        <card>
+            <id>1UZkk_nqZ4Y2OmNtkHwlYT5e4rSafxWCV</id>
+            <slots>5</slots>
+            <name>Grafdigger's Cage.png</name>
+            <query>grafdiggers cage</query>
+        </card>
+        <card>
+            <id>1XzEmUyXecEvpVADssICpjpeffYHcmzTU</id>
+            <slots>6</slots>
+            <name>Underground River.png</name>
+            <query>underground river</query>
+        </card>
+        <card>
+            <id>1DKIGha1oHUIXylFlhBBnu4FJi_XPU6BV</id>
+            <slots>7</slots>
+            <name>Clever Impersonator.png</name>
+            <query>clever impersonator</query>
+        </card>
+        <card>
+            <id>1Qd4X268chI0YyiHC6WXAwWlSxJbWNftJ</id>
+            <slots>8</slots>
+            <name>Mana Drain.png</name>
+            <query>mana drain</query>
+        </card>
+        <card>
+            <id>1cSJR5RzgIAIbJEHtsy6jnUkUBUtT3BCw</id>
+            <slots>9</slots>
+            <name>Minamo, School at Water's Edge.png</name>
+            <query>minamo school at waters edge</query>
+        </card>
+        <card>
+            <id>1g_d1YShi5OEp-aPySaUE7n0w5vHKVlvT</id>
+            <slots>10</slots>
+            <name>Delay.png</name>
+            <query>delay</query>
+        </card>
+        <card>
+            <id>1Y8wFkwoXQxTgVM28yHh4iyyynSabOetb</id>
+            <slots>11</slots>
+            <name>Blind Obedience.png</name>
+            <query>blind obedience</query>
+        </card>
+        <card>
+            <id>1fjiMMZZ2lJKFIMQJvQtByyxgovwTja6n</id>
+            <slots>12</slots>
+            <name>Smothering Tithe.png</name>
+            <query>smothering tithe</query>
+        </card>
+        <card>
+            <id>1LnWW1dJi0oHn116TD2LecoyP4IrwBnel</id>
+            <slots>13</slots>
+            <name>Spire of Industry.png</name>
+            <query>spire of industry</query>
+        </card>
+        <card>
+            <id>1ntaJEDOnL3KwAPRoWL2nXsgXMPZrQ0LT</id>
+            <slots>14</slots>
+            <name>Teferi, Time Raveler.png</name>
+            <query>teferi time raveler</query>
+        </card>
+        <card>
+            <id>1Mnne1bZ43AvH6Y2AmXM2BZgUkt3zLOt-</id>
+            <slots>15</slots>
+            <name>Fierce Guardianship.png</name>
+            <query>fierce guardianship</query>
+        </card>
+        <card>
+            <id>1s3haguHpPqnPRd4khUxpKRqeTO8zrPKt</id>
+            <slots>16</slots>
+            <name>Muddle the Mixture.png</name>
+            <query>muddle mixture</query>
+        </card>
+        <card>
+            <id>1zL5zwjp840F-f8RNWEoIVD-om2DTUId5</id>
+            <slots>17</slots>
+            <name>Urza's Saga.png</name>
+            <query>urzas saga</query>
+        </card>
+        <card>
+            <id>1Hduv2UCABuRuEgCyo4tHiim7GTfmTzwI</id>
+            <slots>18</slots>
+            <name>Touch the Spirit Realm.jpg</name>
+            <query>touch spirit realm</query>
+        </card>
+        <card>
+            <id>1PwGWYDuZ-22_zkeg49gbDny4I4bdZMIm</id>
+            <slots>19</slots>
+            <name>Imposter Mech.jpg</name>
+            <query>imposter mech</query>
+        </card>
+        <card>
+            <id>1ZMPgytE2gFtFB3WKlBJ2K3nwM9_2w4F-</id>
+            <slots>20</slots>
+            <name>An Offer You Can't Refuse.jpg</name>
+            <query>an offer you cant refuse</query>
+        </card>
+        <card>
+            <id>1CDiGzjxCS0raXDZj-gS9Yl0fBqxPDLel</id>
+            <slots>21</slots>
+            <name>Faerie Mastermind.png</name>
+            <query>faerie mastermind</query>
+        </card>
+        <card>
+            <id>19Q4vAndQdAsxbDsy5sXVT4R4zy1LWLYk</id>
+            <slots>22</slots>
+            <name>Talion, the Kindly Lord.png</name>
+            <query>talion kindly lord</query>
+        </card>
+        <card>
+            <id>1AhJgzBAb0iFWz_4Nykqdu5cajZjfj86i</id>
+            <slots>23</slots>
+            <name>Dauntless Dismantler.jpg</name>
+            <query>dauntless dismantler</query>
+        </card>
+        <card>
+            <id>1I9ZA3ExgaEQlSIrxeiEzWEvwuLtFz0ny</id>
+            <slots>24</slots>
+            <name>Meticulous Archive.jpg</name>
+            <query>meticulous archive</query>
+        </card>
+    </fronts>
+    <cardback>1Lhu3RaagvOK-UailFzxEWAAAGfs6B2yv</cardback>
+</order>

@@ -1,0 +1,55 @@
+<order>
+    <details>
+        <quantity>612</quantity>
+        <bracket>612</bracket>
+        <stock>(S30) Standard Smooth</stock>
+        <foil>false</foil>
+    </details>
+    <fronts>
+        <card>
+            <id>1wwee0uygYt6VCEAg4w1FzHA0OoF1dJKn</id>
+            <slots>135,136,137</slots>
+            <name>Command Beacon (BFZ-C).jpg</name>
+            <query>command beacon</query>
+        </card>
+        <card>
+            <id>1y4P2BtvBaM20di1-6qJ4pjhLKwkETVTD</id>
+            <slots>138,139,140,141,142,143,144,145,146,147</slots>
+            <name>Wasteland (BFZ).jpg</name>
+            <query>wasteland</query>
+        </card>
+        <card>
+            <id>1mUyOmGaUDEyMDCxMUssw_QCWvLVnRQjZ</id>
+            <slots>148,149,150,151,152,153,154,155,156,157</slots>
+            <name>Hanweir Battlements (Vincent Proce).png</name>
+            <query>hanweir battlements</query>
+        </card>
+        <card>
+            <id>1X7LZGbFnV7YPSgz7P1R4ejo_1CtZBJcK</id>
+            <slots>376,377,378,379,380</slots>
+            <name>Brightclimb Pathway (Johannes Voss).jpg</name>
+            <query>brightclimb pathway</query>
+        </card>
+        <card>
+            <id>1XYhdXwXhGd3BoWpqt3VawBBftIgV47LV</id>
+            <slots>381,382,383,384,385</slots>
+            <name>Branchloft Pathway (Titus Lunter).jpg</name>
+            <query>branchloft pathway</query>
+        </card>
+    </fronts>
+    <backs>
+        <card>
+            <id>149ixgMj6C-XMIjsslYYXoT5ADRYZL7ku</id>
+            <slots>148,149,150,151,152,153,154,155,156,157</slots>
+            <name>Hanweir, the Writhing Township Top.png</name>
+            <query>hanweir writhing township top</query>
+        </card>
+        <card>
+            <id>1nfVOU6tm-xwF-u8OzxEJoQfC-O-D1q_I</id>
+            <slots>376,377,378,379,380</slots>
+            <name>Grimclimb Pathway (Johannes Voss).jpg</name>
+            <query>grimclimb pathway</query>
+        </card>
+    </backs>
+    <cardback>1Aa98sI-YvFUSnNYGGfJvc7NR9VtUOpNp</cardback>
+</order>

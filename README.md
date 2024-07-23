@@ -107,3 +107,35 @@ The background art currently found in `assets/backgrounds` is a collection of ve
 #### Adding new background art
 
 You may add any new background art you wish to the `assets/backgrounds` directory.  Once a new background is added, update the `data/sets.csv` with the appropriate filename on the row you want to use that piece of background art.
+
+## MPC.com utilities
+
+### Adjust mpcfill.com images
+
+This script allows you to update the images in a target XML file with images from a source directory.  This is useful for updating the images in a decklist exported from Archidekt/Moxfield to use the MPC.com images.
+
+1. Run the script to update images in the target XML file:
+
+   ```bash
+   node src/update-mpc-fill-images.js --target data/mdfc-lands-target.xml --source data/mpc
+   ```
+
+### Export Archidekt deck to MPC.com
+
+For those using [Archidekt](https://archidekt.com) to manage their decks, you can export a deck to MPC.com with the following steps.
+
+1. _(Optionally)_ Add any labels you want to retain in the final CSV file to cards in your deck in Archidekt.
+
+   For example, you may want to add a "Proxy" label to cards that are being proxied, to help differentiate them from real cards you own
+
+1. Export the deck in Archidekt as a CSV.
+
+   Enable the following columns: Quantity, Name, Edition name, Edition Code, Collector Number, Category, and Label.
+
+1. Download the generated CSV file.
+1. Add the following headers to the CSV file:
+
+   ```csv
+   quantity,name,edition_name,edition_code,category,label,collector_number
+   ```
+
