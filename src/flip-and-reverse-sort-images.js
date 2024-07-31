@@ -2,8 +2,8 @@ const fs = require("fs");
 const path = require("path");
 const sharp = require("sharp");
 
-const inputDir = path.join(__dirname, "../output");
-const outputDir = path.join(__dirname, "../output-reversed");
+const inputDir = path.join(__dirname, "../output-cn");
+const outputDir = path.join(__dirname, "../output-cn-reversed");
 
 // Ensure the output directory exists
 if (!fs.existsSync(outputDir)) {
