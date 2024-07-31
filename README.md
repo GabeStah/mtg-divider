@@ -193,3 +193,37 @@ For those using [Archidekt](https://archidekt.com) to manage their decks, you ca
    quantity,name,edition_name,edition_code,category,label,collector_number
    ```
 
+### Create an mpcfill.com CSV file from Archidekt export
+
+This utility script generates an mpcfill.com-compatible CSV file from an Archidekt deck export.  The purpose is to reuse images you've used in the past that match specific card+set combinations, to maintain some order in your collection proxies.  This is accomplished by scanning a directory of XML files generated from MPC.com and matching the card names in the Archidekt export to the card names in the XML files.  The final CSV file will contain the necessary data to upload to mpcfill.com, and will be sorted by set code and collector number.
+
+1. _(Optional)_ Manually add more mpcfill.com exported XML files to the `data/mpc` directory.  There are already a few files in there to get you started based on my own preferences.  The script will scan this directory for XML files to use as the source of card images, preferring the most recently modified files.
+
+   To add your own XML file you select **Add Cards** on the mpcfill.com site, select the images you prefer, then click **Download** to get the XML file.
+
+2. Open your Archidekt deck.
+3. Click the **Extras** button and select **Export deck**.
+4. Under **Export type** select `CSV`.
+5. Under **Enabled columns** click on **Check all** to enable all columns.
+6. Click the **Download** button to download the CSV file.
+7. Save the CSV file to the file system with a known path.
+8. Now run the script to generate the mpcfill.com CSV file:
+
+   ```bash
+   node src/create-mpcfill-csv.js -i "./input.csv" -x "./data/mpc/" -o "./output.csv"
+   ```
+
+   Update the `-i` flag with the path to the Archidekt CSV file, the `-x` flag with the path to the directory containing the MPC.com XML files, and the `-o` flag with the path to the output CSV file.
+
+   The script will scan the `data/mpc` directory for XML files and generate a new CSV file with the necessary data to upload to mpcfill.com.
+
+   If your input deck contains more than 612 cards, the script will automatically split the output into multiple CSV files, each containing a maximum of 612 cards.
+
+9. You can now upload the generated CSV file(s) to mpcfill.com by clicking **Add Cards**, clicking **CSV**, and loading your generated CSV file.
+10. Once the images finish loading, verify everything looks correct then click **Download** and select **XML** to download the XML file.
+    
+    This XML file is used by the [mpcfill CLI](https://github.com/chilli-axe/mpc-autofill), just like normal.
+
+## Updating Chrome drivers
+
+- Downloads: https://googlechromelabs.github.io/chrome-for-testing/#stable

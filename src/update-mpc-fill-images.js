@@ -53,7 +53,6 @@ async function updateTargetXML(targetPath, sourcePath, outputPath) {
   sortedSourceFiles.sort((a, b) => b.mtime - a.mtime);
 
   // General function to update cards
-  // General function to update cards
   async function updateCards(targetCardsSection, sourceCardSection) {
     const section = targetXML.order[targetCardsSection];
     if (section && section.length > 0 && section[0].card) {

@@ -1,0 +1,18 @@
+module.exports.archidektCSVColumns = [
+  { index: 0, name: "Quantity" },
+  { index: 1, name: "Name" },
+  { index: 2, name: "Set Name" },
+  { index: 3, name: "Set Code" },
+  { index: 4, name: "Category" },
+  { index: 5, name: "Secondary Categories" },
+  { index: 6, name: "Label" },
+  { index: 7, name: "Modifier" },
+  { index: 8, name: "Collector Number" },
+  { index: 9, name: "Salt" },
+  { index: 10, name: "Color" },
+  { index: 11, name: "Mana Value" },
+  { index: 12, name: "Rarity" },
+  { index: 13, name: "Type" },
+  { index: 14, name: "Price" },
+  { index: 15, name: "Collection" },
+];
