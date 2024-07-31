@@ -1,0 +1,29 @@
+<order>
+    <details>
+        <quantity>3</quantity>
+        <bracket>18</bracket>
+        <stock>(S30) Standard Smooth</stock>
+        <foil>false</foil>
+    </details>
+    <fronts>
+        <card>
+            <id>1Ub1VQnnk031fajQC8RF5MAZi7Edcxpab</id>
+            <slots>0</slots>
+            <name>Rise of the Dark Realms.png</name>
+            <query>rise of dark realms</query>
+        </card>
+        <card>
+            <id>1I2PFEG-YzdKixijhBikRW8VVELyM5QcD</id>
+            <slots>1</slots>
+            <name>Ashnod_s Altar.png</name>
+            <query>ashnods altar</query>
+        </card>
+        <card>
+            <id>1-zKMA4R0wL6U-vUmKdzgYtvTV5-Ylaru</id>
+            <slots>2</slots>
+            <name>Liliana, Dreadhorde General.png</name>
+            <query>liliana dreadhorde general</query>
+        </card>
+    </fronts>
+    <cardback>1Aa98sI-YvFUSnNYGGfJvc7NR9VtUOpNp</cardback>
+</order>
